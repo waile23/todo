@@ -1,0 +1,70 @@
+$def with(userinfo)
+$var title: 注册
+
+<legend>$userinfo.get('name'),完善你的帐号信息
+<span>填写邮箱与密码，确保你的账号不会丢失</span>
+</legend>
+
+<div class="register_block row-fluid">
+
+<div class="span4 block">
+
+<img src="$userinfo.get('avatar')"/>
+
+</div>
+<div class="span8 email_register block">
+<form class="form-horizontal" method="post">
+	<input type="hidden" value="$userinfo.get('type')"  name="p_from">
+	<input type="hidden" value="$userinfo.get('uid')"  name="p_auth">
+	<input type="hidden" value="$userinfo.get('avatar')"  name="p_logo">
+	<div class="control-group">
+		<label class="control-label" for="inputEmail">电子邮箱</label>
+		<div class="controls">
+ 			<input type="text" value="" id="inputEmail" name="p_email" class=":email :required :ajax;/accounts/check/email :wait;1000">
+		</div>  
+	</div>
+	<div class="control-group">
+		<label class="control-label" for="inputNick">昵称</label>
+		<div class="controls">
+ 			<input type="text" value="$userinfo.get('name')" id="inputNick" name="p_name" class=":required :ajax;/accounts/check/name :wait;1000">
+		</div>  
+	</div>
+	<div class="control-group">
+		<label class="control-label" for="inputPass">密码</label>
+		<div class="controls">
+ 			<input type="password" value="" id="inputPass"  name="p_pass" class=":required">
+		</div>  
+	</div>
+	<div class="control-group">
+		<label class="control-label" for="reinputPass">确认密码</label>
+		<div class="controls">
+ 			<input type="password" id="reinputPass" class=":same_as;inputPass">
+		</div>  
+	</div>
+  <!-- 	
+	<div class="control-group">
+		<label class="control-label" for="imgcheck">验证码</label>
+		<div class="controls">
+ 			<input type="text" id="imgcheck"><img src=""/>
+		</div>  
+	</div>
+	-->
+		<div class="control-group">
+		<div class="controls">
+		
+			<!-- 
+			<label class="checkbox">
+        		<input type="checkbox" class=":accept">同意秀玩具的<a href="/company/serviceninfo">服务条款</a>
+      		</label>
+      		 -->
+ 			<button type="submit" class="btn">确认</button>
+		</div>  
+	</div>	
+</form>
+</div>
+</div>
+<script src="/static/js/tools/vanadium-min.js"></script>
+<script type="text/javascript">
+
+
+</script>

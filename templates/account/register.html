@@ -1,0 +1,55 @@
+$def with(user)
+
+$var title: 注册
+
+$if user:	
+	<div class="alert alert-warning alert-dismissable">
+	    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	    <strong>出错了，</strong> 注册失败,请重试!
+	</div>
+	
+<div class="col-md-6">
+	<form role="form" method="post">
+		<div class="form-group">
+			<label for="inputEmail">电子邮箱</label>
+			$if user:
+	 			<input type="text" value="$user.u_email" id="inputEmail" name="u_email" placeholder="Enter email" class=":email :required :ajax;/account/check/email :wait;1000 form-control input-sm">
+	 		$else:
+	 			<input type="text" value="" id="inputEmail" name="u_email" placeholder="输入email" class=":email :required :ajax;/account/check/email form-control">
+		</div>
+		<div class="form-group">
+			<label for="inputNick">昵称</label>
+			$if user:
+	 			<input type="text" value="$user.u_name" id="inputNick" name="u_name" placeholder="昵称" class=":required :ajax;/account/check/name :wait;1000 form-control">
+	 		$else:
+	 			<input type="text" value="" id="inputNick" name="u_name" placeholder="昵称" class=":required :ajax;/account/check/name form-control">
+		</div>
+		<div class="form-group">
+			<label for="inputPass">密码</label>
+	 		<input type="password" value="" id="inputPass" name="u_pass" placeholder="输入密码" class=":required form-control">
+		</div>
+		<div class="form-group">
+			<label for="reinputPass">确认密码</label>
+	 		<input type="password" id="reinputPass" placeholder="确认密码" class=":same_as;inputPass form-control">
+		</div>
+	  <!-- 	
+		<div class="control-group">
+			<label class="control-label" for="imgcheck">验证码</label>
+			<div class="controls">
+	 			<input type="text" id="imgcheck"><img src=""/>
+			</div>  
+		</div>
+		-->
+		<div class="control-group">
+			<div class="controls">
+				<!-- 
+				<label class="checkbox">
+	        		<input type="checkbox" class=":accept">同意liulin.info的<a href="/company/serviceninfo">服务条款</a>
+	      		</label>
+	      		 -->
+	 			<button type="submit" class="btn-primary btn">注册</button>
+			</div>  
+		</div>	
+	</form>
+</div>
+<script src="$web.config.site_config.static/js/vanadium-min.js"></script>

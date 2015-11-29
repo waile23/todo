@@ -1,0 +1,26 @@
+$def with(info)
+
+$var title: 找回密码
+
+$if info and info.get('code')==1:
+	<div class="x-center x_f14">
+		邮件已发送，请检查你的邮箱(有可能在你的垃圾邮箱),<a href="/account/findpass"> &gt;&gt;重新发送邮件</a>
+	</div>
+
+<div class="col-md-6">
+	<form class="form-horizontal" method="post">
+		<div class="form-group">
+			$if info and info.get('code')==0:
+	 			<input type="text" value="$info.get('email')" id="inputEmail" name="u_email" placeholder="输入您的email" class="form-control">
+	 		$else:
+	 			<input type="text" value="" id="inputEmail" name="u_email" placeholder="输入您的email" class="form-control">
+	 		<button type="submit" class="btn btn-primary">找回密码</button>
+		</div>	
+		<div class="form-group">
+			$if info:
+				<div class="alert alert-error">
+	  				<h4>你不会注册邮箱忘记了吧!</h4>
+				</div>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,41 @@
+$def with(todos,user,currentpage,pagesize,totalpage,total)
+$ paginationcount = 4
+	<div class="row">
+		<h5>您现在访问的是<a href="#">$user.u_name</a>的空间，您可以加<a href="#">$user.u_name</a>为您的好友！，本功能开发中</h5>
+	</div>
+	<div class="row">
+        <ul class="list-group">
+            $for todo in todos:
+                $if todo.t_finished == 1:
+                    $ status = 'finished'
+                $else:
+                    $ status = ''
+            		
+                <li class="list-group-item $:status">
+                    <span class="glyphicon glyphicon-calendar"></span>               
+                    $if todo.t_finished == 0:
+                        $todo.t_title
+                        <h5>
+                        	<small><a href="/todo/$todo.t_create_uid/user">$user.u_name</a> 创建于 <span class="text-info">$time_span(todo.t_create_date)</span></small>
+	                    </h5>
+                    $if todo.t_finished == 1:
+                        <del><span class="text-success">$todo.t_title</span></del>
+                        <h5>
+                        	<small><a href="/todo/$todo.t_create_uid/user">$user.u_name</a> 创建于 <span class="text-info">$time_span(todo.t_create_date)</span></small>
+	                    </h5>                        	
+                </li>
+        </ul>
+    </div>
+    <div class="row">
+	    <ul class="pager">
+			$if currentpage <= 0:
+				<li class="previous disabled"><a href="#">&larr; Previous</a></li>
+			$else:
+				<li class="previous"><a href="/?page=${currentpage - 1}">&larr; Previous</a></li>
+		    	
+			$if currentpage >= totalpage - 1:		    	
+		 		<li class="next disabled"><a href="#">Next &rarr;</a></li>
+			$else:
+				<li class="next"><a href="/?page=${currentpage + 1}">Next &rarr;</a></li>
+		</ul>
+	</div>

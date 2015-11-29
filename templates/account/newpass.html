@@ -1,0 +1,35 @@
+$def with(info)
+
+$var title: 登录
+
+	$if info['code']==-1:
+		<div class="x-center x_f14">
+			$info['message']<a href="/account/findpass"> &gt;&gt;重新发送邮件</a>	
+		</div>
+	$elif info['code']==1:
+		<div class="x-center x_f14">
+			$info['message']<a href="/account/login"> &gt;&gt;立即登录</a>	
+		</div>
+	$else:
+		<div class="slogan">这回可得好好记住了</div>
+
+	<div class="col-md-6">
+		<form class="form-horizontal" method="post">
+			<input type="hidden" value="$info['params'].v" name="v"/>
+			<input type="hidden" value="$info['params'].email" name="email"/>
+			<div class="form-group">
+				<label class="control-label" for="inputPass">密码</label>
+		 		<input type="password" value="" id="inputPass"  name="u_pass" class=":required form-control">
+			</div>
+			<div class="form-group">
+				<label class="control-label" for="reinputPass">确认密码</label>
+		 		<input type="password" id="reinputPass" class=":same_as;inputPass form-control">
+			</div>
+			<div class="form-group">
+				<div class="controls">
+		 			<button type="submit" class="btn btn-primary">提交</button>
+				</div>  
+			</div>	
+		</form>
+	</div>
+<script src="/static/js/vanadium-min.js"></script>

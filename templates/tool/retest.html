@@ -1,0 +1,40 @@
+$def with(re_text, re_patterns, re_result, message)
+
+$var title: 正则测试
+
+$if message:
+	<div class="alert alert-warning alert-dismissable">
+ 		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	    <strong>$message</strong>
+	</div>
+<div class="row">
+    <form role="form" method="post">
+		<div class="form-group">
+			<label class="control-label">text</label>
+			$if re_text:
+			    <textarea class="form-control" rows="5" id="re_text" name="re_text">$re_text</textarea>
+            $else:
+                <textarea class="form-control" rows="5" id="re_text" name="re_text" placeholder="input text"></textarea>			    
+        </div>
+		<div class="form-group">
+			<label class="control-label" for="inputPass">patterns  <small>可以输入多组测试的正则数据</small></label>
+			$if re_patterns:
+			    <textarea class="form-control" rows="5" id="re_patterns" name="re_patterns" >$re_patterns</textarea>
+			$else:
+			    <textarea class="form-control" rows="5" id="re_patterns" name="re_patterns" placeholder="input patterns" >$re_patterns</textarea>
+		</div>
+        <div class="form-group">
+			<div class="controls">
+	 			<button type="submit" class="btn-primary btn">test</button>
+			</div>  
+		</div>	
+	</form>
+    $if re_result:
+    	$ c = 0
+        $for re in re_result:
+        	$ c = c+1
+		    <div class="form-group">
+			    <label class="control-label">result $c</label>
+	 		    <pre>$re</pre>
+		    </div>	
+</div>

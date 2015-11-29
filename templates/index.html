@@ -1,0 +1,87 @@
+$def with(todos,currentpage,pagesize,totalpage,total)
+$ paginationcount = 4
+    <div class="row">
+        <ul class="list-group">
+            $for todo in todos:
+                $if todo.t_finished == 1:
+                    $ status = 'finished'
+                $else:
+                    $ status = ''
+                    
+                $if not ctx.user:
+            		$ todo_u_name =  todo.u_name
+            	$else:
+            		$ todo_u_name = ''
+                <li class="list-group-item $:status">
+                    
+                    <span class="glyphicon glyphicon-calendar"></span>               
+                    $if todo.t_finished == 0:
+                        $todo.t_title
+                        <h5>
+                        	<small><a href="/todo/$todo.t_create_uid/user">$:todo_u_name</a> 创建于 <span class="text-info">$time_span(todo.t_create_date)</span></small>
+                        	$if ctx.user:
+    	                        <span class="pull-right">
+    		                        <a class="btn btn-success btn-xs" href="/todo/$todo.t_id/finish?status=yes">完成</a>
+    		                        $if todo.t_share == 1:
+    		                        	<a class="btn btn-warning btn-xs" href="/todo/$todo.t_id/share?status=no">私人</a>
+    		                        $else:
+    		                        	<a class="btn btn-info btn-xs" href="/todo/$todo.t_id/share?status=yes">分享</a>
+    		                        	
+    		                        <a class="btn btn-primary btn-xs" href="/todo/$todo.t_id/edit">修改</a>
+    		                        <a class="btn btn-danger btn-xs" href="/todo/$todo.t_id/delete" onclick="return confirm('删除以后不能恢复的，确定？')">删除</a>
+    		                    </span>
+	                    </h5>
+                    $if todo.t_finished == 1:
+                        <del><span class="text-success">$todo.t_title</span></del>
+                        <h5>
+                        	<small><a href="/todo/$todo.t_create_uid/user">$:todo_u_name</a> 创建于 <span class="text-info">$time_span(todo.t_create_date)</span></small>
+                        	$if ctx.user:
+    	                        <span class="pull-right">
+    	                        	<a class="btn btn-info btn-xs" href="/todo/$todo.t_id/finish?status=no">恢复</a>
+    		                    </span>
+	                    </h5>                        	
+                </li>
+        </ul>
+    </div>
+    <div class="row">
+	    <ul class="pager">
+			$if currentpage <= 0:
+				<li class="previous disabled"><a href="#">&larr; Previous</a></li>
+			$else:
+				<li class="previous"><a href="/?page=${currentpage - 1}">&larr; Previous</a></li>
+		    	
+			$if currentpage >= totalpage - 1:		    	
+		 		<li class="next disabled"><a href="#">Next &rarr;</a></li>
+			$else:
+				<li class="next"><a href="/?page=${currentpage + 1}">Next &rarr;</a></li>
+		</ul>
+	</div>
+    <!-- 
+    <div class="row">
+		<ul class="pagination pagination-centered">
+		$if currentpage > paginationcount/2:
+			<li><a href="/">«</a>	
+		$for i in range(currentpage-paginationcount/2,currentpage+paginationcount/2):
+			$if i>-1 and i<totalpage :
+				$if i==currentpage:
+					<li class="active">\
+				$else:
+					<li>\
+				<a href="/?page=$i">$(i+1)</a></li>
+		$if (totalpage-currentpage)>paginationcount/2:	
+			<li><a href="/?page=${totalpage-1}">»</a>
+		</ul>
+	</div>
+	 -->
+
+    <div class="row">
+        <form action="/todo/new" method="post" id="post_new" class="form-horizontal" role="form">
+            <div class="input-group">
+                <input type="text" class="form-control" id="title" name="title"  placeholder="your new todo ...">
+                <span class="input-group-btn">
+                	<button type="submit" class="btn btn-default">添加</button>
+                </span>
+            </div>
+            
+        </form>
+    </div>
